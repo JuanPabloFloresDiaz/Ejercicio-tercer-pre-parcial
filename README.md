@@ -41,8 +41,8 @@ Preguntas:
 - ¿Existe un punto de origen único?  
 - ¿Hay ciclos posibles?  
 - ¿La información fluye en una sola dirección?  
-Decisión: - [ ] Árbol  - [ ] Grafo  
-Justificación técnica:
+Decisión: - [ ] Árbol  - [x] Grafo  
+Justificación técnica: Aunque la estructura organizacional (Rectoría → Facultades → Departamentos) es jerárquica, las asignaturas con prerrequisitos crean relaciones que pueden formar ciclos y múltiples caminos, lo cual requiere un grafo.
 
 ---
 
@@ -53,8 +53,8 @@ Preguntas:
 - ¿Es posible formar ciclos de recomendación?  
 - ¿Se parece a una jerarquía o a una red?  
 - ¿Se necesitan múltiples tipos de relaciones?  
-Decisión: - [ ] Árbol  - [ ] Grafo  
-Justificación técnica:
+Decisión: - [ ] Árbol  - [x] Grafo  
+Justificación técnica: Las relaciones entre usuarios (seguir), listas, calificaciones y recomendaciones son multidireccionales y pueden formar ciclos. No hay jerarquía única, sino una red compleja de conexiones.
 
 ---
 
@@ -65,8 +65,8 @@ Preguntas:
 - ¿Es crítico detectar dependencias circulares?  
 - ¿La relación es "contiene" o "depende de"?  
 - ¿Se necesita detectar componentes inconexos?  
-Decisión: - [ ] Árbol  - [ ] Grafo  
-Justificación técnica:
+Decisión: - [ ] Árbol  - [x] Grafo  
+Justificación técnica: Las dependencias entre módulos pueden ser circulares (ciclos), y es crítico detectarlas. Las relaciones son de tipo "depende de", no jerárquicas, y se necesita identificar componentes inconexos.
 
 ---
 
@@ -77,8 +77,8 @@ Preguntas:
 - ¿Existe un punto central único?  
 - ¿Relaciones de adyacencia espacial o jerarquía?  
 - ¿Se necesitan encontrar caminos entre puntos arbitrarios?  
-Decisión: - [ ] Árbol  - [ ] Grafo  
-Justificación técnica:
+Decisión: - [ ] Árbol  - [x] Grafo  
+Justificación técnica: Los vóxeles tienen conexiones uniformes en seis direcciones (vecindad espacial), sin un punto central único. Es una estructura de adyacencia espacial, no jerárquica, ideal para grafos.
 
 ---
 
@@ -89,8 +89,8 @@ Preguntas:
 - ¿Existen relaciones cruzadas entre categorías?  
 - ¿Las transferencias crean conexiones complejas?  
 - ¿La estructura es de contención o interconexión?  
-Decisión: - [ ] Árbol  - [ ] Grafo  
-Justificación técnica:
+Decisión: - [ ] Árbol  - [x] Grafo  
+Justificación técnica: Aunque las categorías pueden parecer jerárquicas, los productos pueden pertenecer a múltiples categorías y las transferencias entre bodegas crean relaciones cruzadas que rompen la estructura de árbol.
 
 ---
 
@@ -100,10 +100,20 @@ Selecciona DOS problemas:
 - Uno para implementar con Grafo
 
 Mi selección:
-- Problema para implementar con Árbol: _______  
+- Problema para implementar con Árbol: **Problema 1 - Sistema de Gestión Universitaria**
     - Razones principales:
-- Problema para implementar con Grafo: _______  
+        - La estructura organizacional (Rectoría → Facultades → Departamentos → Programas) es puramente jerárquica
+        - Tiene un único nodo raíz (Rectoría)
+        - Las relaciones padre-hijo son claras y unidireccionales
+        - Se puede implementar como árbol n-ario para representar la jerarquía administrativa
+        - Los prerrequisitos de asignaturas se pueden manejar como estructura separada o caso especial
+- Problema para implementar con Grafo: **Problema 3 - Sistema de Gestión de Proyectos de Software**
     - Razones principales:
+        - Representa el caso clásico de grafo dirigido con dependencias
+        - Necesita detectar ciclos (dependencias circulares) - operación fundamental de grafos
+        - Permite identificar componentes conectados para paralelización
+        - Las relaciones "depende de" son claramente no jerárquicas
+        - Es el ejemplo más didáctico y directo para aprender algoritmos de grafos (DFS, detección de ciclos)
 
 ---
 
