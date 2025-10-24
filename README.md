@@ -182,8 +182,89 @@ Mi selección:
 ---
 
 ## Reflexión final
-- ¿Qué patrones te ayudaron a distinguir entre árboles y grafos?  
-- ¿En qué problemas fue más difícil decidir y por qué?
+
+### ¿Qué patrones te ayudaron a distinguir entre árboles y grafos?
+
+Los patrones clave que facilitaron la distinción fueron:
+
+1. **Patrón de Jerarquía Estricta (Árbol):**
+   - Presencia de una autoridad o punto de origen único y claramente definido
+   - Relaciones de "contención" o "pertenencia" que fluyen en una sola dirección
+   - Imposibilidad lógica de ciclos (un departamento no puede contener a su propia facultad)
+   - Ejemplo: La estructura organizacional universitaria (Rectoría → Facultades → Departamentos)
+
+2. **Patrón de Dependencias Bidireccionales o Cruzadas (Grafo):**
+   - Relaciones de "depende de" o "está relacionado con" en lugar de "contiene"
+   - Posibilidad de ciclos (A depende de B, B depende de C, C depende de A)
+   - Múltiples caminos posibles entre dos entidades
+   - Ejemplo: Módulos de software con dependencias circulares
+
+3. **Patrón de Pertenencia Múltiple (Grafo):**
+   - Una entidad puede pertenecer a múltiples categorías o estar conectada con múltiples entidades del mismo nivel
+   - Relaciones many-to-many que rompen la estructura jerárquica
+   - Ejemplo: Productos que pertenecen a múltiples categorías
+
+4. **Patrón de Red de Conexiones (Grafo):**
+   - Relaciones peer-to-peer sin jerarquía clara
+   - Conexiones uniformes en múltiples direcciones
+   - Ejemplo: Red social de usuarios, vóxeles en tomografía 3D
+
+5. **Indicadores de Árbol:**
+   - Palabras clave: "jerarquía", "subordinación", "contiene", "padre-hijo", "nivel"
+   - Estructura organizacional clara y estable
+   - Flujo de información unidireccional (de arriba hacia abajo)
+
+6. **Indicadores de Grafo:**
+   - Palabras clave: "depende de", "relacionado con", "conectado", "red", "ciclo", "múltiples caminos"
+   - Relaciones dinámicas y complejas
+   - Necesidad de detectar ciclos o analizar caminos
+
+### ¿En qué problemas fue más difícil decidir y por qué?
+
+**Problema más difícil de decidir: Problema 1 (Sistema de Gestión Universitaria)**
+
+**Razones de la dificultad:**
+
+1. **Naturaleza Híbrida:**
+   - La estructura organizacional (Rectoría → Facultades → Departamentos → Programas) es claramente un árbol
+   - Los prerrequisitos de asignaturas forman un grafo dirigido acíclico (DAG)
+   - El sistema tiene dos estructuras de datos diferentes coexistiendo
+
+2. **Interpretación del Alcance:**
+   - Si nos enfocamos solo en la jerarquía administrativa → **Árbol** es perfectamente adecuado
+   - Si incluimos los prerrequisitos de asignaturas → **Grafo** es necesario
+   - La decisión depende de qué aspecto del sistema priorizamos
+
+3. **Solución Adoptada:**
+   - Implementamos la jerarquía administrativa como **árbol n-ario**
+   - Esto fue válido porque:
+     - Los prerrequisitos pueden manejarse como una estructura separada
+     - La mayoría de operaciones del sistema (90%) son sobre la jerarquía organizacional
+     - Los prerrequisitos son metadata adicional que no afecta la estructura principal
+
+**Otros problemas con complejidad en la decisión:**
+
+**Problema 5 (Comercio Electrónico):**
+- Similar al Problema 1, tiene una estructura jerárquica (Bodegas → Categorías → Productos)
+- Pero los productos en múltiples categorías y las transferencias entre bodegas rompen la jerarquía
+- Decisión: **Grafo**, porque las relaciones cruzadas son fundamentales para el funcionamiento del sistema
+
+**Lección aprendida:**
+La clave no es solo identificar si existen relaciones jerárquicas, sino determinar:
+1. **¿Qué relaciones son fundamentales para el sistema?**
+2. **¿Las excepciones a la jerarquía son casos aislados o parte esencial del modelo?**
+3. **¿Qué operaciones son críticas y cuál estructura las facilita mejor?**
+
+En el Problema 1, las operaciones críticas eran sobre la jerarquía administrativa, por lo que el árbol fue la elección correcta. Los prerrequisitos, aunque importantes, son secundarios y pueden manejarse por separado.
+
+**Aprendizaje clave:**
+No siempre hay una respuesta única "correcta". La decisión debe basarse en:
+- El contexto específico del problema
+- Las operaciones más frecuentes
+- Los requisitos de rendimiento
+- La simplicidad vs completitud del modelo
+
+En sistemas reales, es común usar estructuras híbridas donde diferentes aspectos del dominio se modelan con diferentes estructuras de datos.
 
 ---
 
