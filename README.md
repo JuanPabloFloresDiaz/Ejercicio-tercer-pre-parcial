@@ -42,7 +42,7 @@ Preguntas:
 - ¿Hay ciclos posibles?  
 - ¿La información fluye en una sola dirección?  
 Decisión: - [ ] Árbol  - [x] Grafo  
-Justificación técnica: Aunque la estructura organizacional (Rectoría → Facultades → Departamentos) es jerárquica, las asignaturas con prerrequisitos crean relaciones que pueden formar ciclos y múltiples caminos, lo cual requiere un grafo.
+Justificación técnica: Aunque la estructura organizacional (Rectoría → Facultades → Departamentos) es jerárquica, las asignaturas con prerrequisitos crean relaciones que pueden formar ciclos y múltiples caminos, lo cual requiere un grafo, pero de igual manera el usar árbol para este ejercicio no sería una mala elección.
 
 ---
 
@@ -119,18 +119,65 @@ Mi selección:
 
 ## Fase 4 — Diseño conceptual
 
-### Para el problema seleccionado con Árbol
-- Nodo raíz:  
-- Relaciones padre-hijo:  
-- Tipo de árbol (binario, n-ario, etc.):  
-- Operaciones principales (insertar, buscar, recorrido, eliminar, etc.):
+### Para el problema seleccionado con Árbol (Sistema de Gestión Universitaria)
 
-### Para el problema seleccionado con Grafo
-- Tipos de nodos:  
-- Tipos de aristas / conexiones:  
-- ¿Dirigido o no dirigido?:  
-- ¿Con peso en las aristas?:  
-- Operaciones principales (búsqueda, detección de ciclos, caminos más cortos, componentes conectados, etc.):
+**Nodo raíz:**  
+- Rectoría (nivel 0 de la jerarquía universitaria)
+
+**Relaciones padre-hijo:**  
+- Rectoría → Facultades (ej: Facultad de Ingeniería, Facultad de Ciencias)
+- Facultades → Departamentos (ej: Departamento de Sistemas, Departamento de Matemáticas)
+- Departamentos → Programas Académicos (ej: Licenciatura en Informática, Maestría en Ciencias)
+- Programas → Asignaturas (ej: Estructura de Datos, Algoritmos, Bases de Datos)
+
+**Tipo de árbol:**  
+- Árbol n-ario (cada nodo puede tener múltiples hijos)
+- No balanceado (diferentes facultades pueden tener diferente cantidad de departamentos)
+
+**Operaciones principales:**
+1. **Insertar:** Agregar nuevas facultades, departamentos, programas o asignaturas en su nivel jerárquico correspondiente
+2. **Buscar:** Localizar una entidad específica (ej: encontrar todas las asignaturas de un programa)
+3. **Recorrido por niveles (BFS):** Mostrar toda la estructura organizacional nivel por nivel
+4. **Recorrido en profundidad (DFS):** Explorar una rama completa (ej: desde Rectoría hasta las asignaturas de un programa específico)
+5. **Eliminar:** Remover entidades y sus dependientes (ej: eliminar un departamento elimina sus programas y asignaturas)
+6. **Listar hijos:** Obtener todas las entidades dependientes de un nodo (ej: todos los departamentos de una facultad)
+7. **Obtener ruta:** Mostrar la jerarquía completa desde la raíz hasta un nodo específico
+
+---
+
+### Para el problema seleccionado con Grafo (Sistema de Gestión de Proyectos de Software)
+
+**Tipos de nodos:**  
+- Módulos/Paquetes de software (ej: módulo de autenticación, módulo de reportes, módulo de pagos)
+- Cada nodo representa un componente independiente del sistema
+
+**Tipos de aristas / conexiones:**  
+- Dependencias directas entre módulos (ej: "módulo A depende de módulo B")
+- Representan que un módulo necesita otro para funcionar correctamente
+
+**¿Dirigido o no dirigido?:**  
+- **Grafo dirigido (dígrafo)**: La dependencia es unidireccional
+- Si A depende de B, no significa que B dependa de A
+- Las aristas tienen dirección: A → B significa "A depende de B"
+
+**¿Con peso en las aristas?:**  
+- **Opcional:** Se pueden usar pesos para representar:
+  - Nivel de acoplamiento entre módulos (bajo, medio, alto)
+  - Complejidad de la dependencia
+  - Prioridad de la dependencia
+- Para el ejercicio básico: **sin peso** (solo conexiones binarias de dependencia)
+
+**Operaciones principales:**
+1. **Agregar módulo:** Insertar un nuevo nodo (módulo) al grafo
+2. **Agregar dependencia:** Crear una arista dirigida entre dos módulos
+3. **Eliminar dependencia:** Remover una conexión entre módulos
+4. **Detección de ciclos (DFS):** Identificar dependencias circulares (A→B→C→A) que causan problemas de compilación
+5. **Ordenamiento topológico:** Determinar el orden correcto de compilación/construcción de módulos
+6. **Búsqueda de dependencias directas:** Listar todos los módulos de los que depende un módulo específico
+7. **Búsqueda de dependencias transitivas:** Encontrar todas las dependencias indirectas de un módulo
+8. **Componentes fuertemente conectados:** Identificar grupos de módulos con dependencias circulares
+9. **Identificar módulos independientes:** Encontrar módulos sin dependencias para paralelizar el trabajo
+10. **Análisis de impacto:** Determinar qué módulos se verían afectados si se modifica un módulo específico
 
 ---
 
